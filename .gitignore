@@ -1,0 +1,40 @@
+# ── OS / Editor ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Go ────────────────────────────────────────────────────────
+bin/
+*.exe
+*.test
+*.out
+coverage.out
+coverage.html
+
+# ── Node / JS ─────────────────────────────────────────────────
+node_modules/
+.next/
+dist/
+build/
+.expo/
+.metro-cache/
+
+# ── Proto / buf ───────────────────────────────────────────────
+# Generated code lives in packages/buf_go — commit it
+# Ignore local buf cache
+.buf/
+
+# ── Environment / secrets ─────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.enc
+*.local.yaml
+*.prod.yaml
+
+# ── Misc ──────────────────────────────────────────────────────
+*.log
+tmp/
