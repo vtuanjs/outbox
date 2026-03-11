@@ -17,11 +17,12 @@
 
     "transforms": "outbox",
     "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",
+    "transforms.outbox.table.field.event.id": "id",
     "transforms.outbox.table.field.event.key": "aggregate_id",
-    "transforms.outbox.table.field.event.type": "event_type",
     "transforms.outbox.route.by.field": "aggregate_type",
     "transforms.outbox.route.topic.replacement": "${routedByValue}",
     "transforms.outbox.table.expand.json.payload": "true",
+    "transforms.outbox.table.fields.additional.placement": "event_type:header",
 
     "tombstones.on.delete": "false",
 

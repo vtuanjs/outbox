@@ -87,6 +87,17 @@ func main() {
 // handle parses the event and updates the order status to "consumed".
 // Idempotent: UPDATE WHERE status != 'consumed' is a no-op on replay.
 func handle(ctx context.Context, pool *pgxpool.Pool, msg kafka.Message) error {
+	var eventType, eventID string
+	for _, h := range msg.Headers {
+		switch h.Key {
+		case "event_type":
+			eventType = string(h.Value)
+		case "id":
+			eventID = string(h.Value)
+		}
+	}
+	log.Printf("headers: id=%s event_type=%s", eventID, eventType)
+
 	// Debezium wraps the message in {"schema":...,"payload":...}.
 	// payload may be a JSON string (raw JSONB) or a JSON object (expand.json.payload=true).
 	raw := msg.Value
