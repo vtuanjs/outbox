@@ -33,6 +33,11 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	// GET /health — liveness probe
+	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
 	// POST /orders — place an order (demonstrates the outbox pattern)
 	mux.HandleFunc("POST /orders", func(w http.ResponseWriter, r *http.Request) {
 		var req order.PlaceOrderRequest
