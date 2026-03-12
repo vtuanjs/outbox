@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:16
+    image: postgres:15
     ports:
       - "5432:5432"
     environment:
@@ -29,7 +29,7 @@ services:
       retries: 10
 
   kafka:
-    image: confluentinc/cp-kafka:7.5.0
+    image: debezium/kafka:2.4.1.Final
     ports:
       - "9092:9092"
     environment:
@@ -47,14 +47,14 @@ services:
       KAFKA_LOG_RETENTION_HOURS: 48
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
     healthcheck:
-      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      test: ["CMD", "/kafka/bin/kafka-topics.sh", "--bootstrap-server", "localhost:9092", "--list"]
       interval: 10s
       timeout: 10s
       retries: 10
       start_period: 20s
 
   kafka-connect:
-    image: debezium/connect:3.0.0.Final
+    image: debezium/connect:2.4.1.Final
     depends_on:
       kafka:
         condition: service_healthy
